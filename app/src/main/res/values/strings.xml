@@ -3,4 +3,5 @@
     <string name="scan_button">Scan</string>
     <string name="add_monster_button">Add</string>
     <string name="login_button">Login</string>
+    <string name="cultist_text">Ph’nglui mglw’nafh Cthulhu R’lyeh wgah’nagl fhtagn.</string>
 </resources>
