@@ -43,7 +43,10 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MapsActivity">
-
+        </activity>
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:parentActivityName=".ScanActivity">
         </activity>
         <activity
             android:name=".MonsterListActivity"
