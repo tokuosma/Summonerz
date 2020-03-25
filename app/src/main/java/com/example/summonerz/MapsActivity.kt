@@ -25,11 +25,17 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.toast
 //import org.jetbrains.anko.toast
 import java.util.*
+import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var gMap: GoogleMap
     lateinit var fusedLocationClient: FusedLocationProviderClient
+//    Random kotlin test
+//    val randomvalues = List(10){
+//        Random(10)
+//        Random.nextInt(0,100)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,8 +101,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
