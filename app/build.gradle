@@ -31,6 +31,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res',
+                        'src/main/res/drawables/monsters_common',
+                        'src/main/res/drawables/monsters_uncommon',
+                        'src/main/res/drawables/monsters_rare',
+                        'src/main/res/drawables/monsters_epic',
+                        'src/main/res/drawables/monsters_master',
+                        'src/main/res/drawables/monsters_legendary'
+            }
+        }
+    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()

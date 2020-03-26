@@ -2,7 +2,9 @@ package com.example.summonerz
 
 import androidx.room.*
 
-@Entity(tableName = "monsters")
+@Entity(tableName = "monsters",
+    indices = [Index(value = ["scan_raw_value"], unique = true)]
+)
 data class Monster(
     @PrimaryKey(autoGenerate = true) var uid : Int?,
     @ColumnInfo(name = "name") var name : String?,
@@ -12,7 +14,8 @@ data class Monster(
     @ColumnInfo(name = "mp") var mp: Int?,
     @ColumnInfo(name = "strength") var strength:Int?,
     @ColumnInfo(name = "speed") var speed:Int?,
-    @ColumnInfo(name = "intelligence") var intelligence:Int?
+    @ColumnInfo(name = "intelligence") var intelligence:Int?,
+    @ColumnInfo(name = "scan_raw_value") var scan_raw_value:String?
 )
 
 @Dao
