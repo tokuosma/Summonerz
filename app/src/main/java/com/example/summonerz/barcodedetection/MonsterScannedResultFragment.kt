@@ -15,8 +15,6 @@ import com.example.summonerz.Monster
 import com.example.summonerz.R
 import com.example.summonerz.camera.WorkflowModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.common.reflect.Reflection.getPackageName
-import org.jetbrains.anko.doAsync
 
 class MonsterScannedResultFragment: BottomSheetDialogFragment() {
 
@@ -45,14 +43,14 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
                 ByteArray(0)
             }
 
-        monster = CreateMonster.create_monster(context,rawValueString, rawValueBytes)
+        monster = CreateMonster.createMonster(context,rawValueString, rawValueBytes)
 //        view.findViewById<RecyclerView>(R.id.barcode_field_recycler_view).apply {
 //            setHasFixedSize(true)
 //            layoutManager = LinearLayoutManager(activity)
 //            adapter = BarcodeFieldAdapter(barcodeFieldList)
 //        }
 
-        view.findViewById<TextView>(R.id.monster_name).text = monster.scan_raw_value + " " + monster.name
+        view.findViewById<TextView>(R.id.monster_name).text = monster.name
         view.findViewById<ImageView>(R.id.monster_icon).setImageResource(resources.getIdentifier(monster.icon , "drawable",
             activity?.packageName
         ));

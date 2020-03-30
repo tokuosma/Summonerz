@@ -6,6 +6,7 @@ import java.nio.ByteBuffer
 import kotlin.random.Random
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.util.*
 import kotlin.random.nextUInt
 
 
@@ -14,10 +15,8 @@ class CreateMonster() {
     companion object {
 
         private const val RANDOM_MAX_VALUE = 5000000
-        fun create_monster(context:Context?, rawValueString:String?, rawValueBytes: ByteArray?): Monster {
-
-
-            var monster = Monster(
+        fun createMonster(context:Context?, rawValueString:String?, rawValueBytes: ByteArray?): Monster {
+            val monster = Monster(
                 uid = null,
                 name = "",
                 type = "",
@@ -31,24 +30,22 @@ class CreateMonster() {
                 scan_raw_value = ""
             )
 
-            var jsonString = getJsonDataFromAsset(context)
+            val jsonString = getJsonDataFromAsset(context)
             val gson = Gson()
             val listMonsterPrototypes = object : TypeToken<List<MonsterPrototype>>() {}.type
 
-            var monsterPrototypes: List<MonsterPrototype> = gson.fromJson(jsonString, listMonsterPrototypes)
-
-            val byteBuffer= ByteBuffer.wrap(rawValueBytes)
-            val seed = byteBuffer.long
-            var random = Random(seed)
-
-            val nextInt = random.nextInt(RANDOM_MAX_VALUE)
-            val index = nextInt.rem( monsterPrototypes.size)
-            var prototype = monsterPrototypes[index.toInt()]
+            val monsterPrototypes: List<MonsterPrototype> = gson.fromJson(jsonString, listMonsterPrototypes)
+            val random = Random(ByteBuffer.wrap(rawValueBytes).long)
+            val prototype = monsterPrototypes[random.nextInt(monsterPrototypes.size)]
 
             monster.scan_raw_value = rawValueString
+            //TODO: Nimet JSON:iin
+            //TODO: Nimen satunnaistus?
             monster.name = prototype.name
             monster.icon = prototype.icon
             monster.type = prototype.type
+            monster.time_of_scan = Date().time
+            //TODO: Statsien generointi. Base arvot jsoniin?
 
             return monster
         }
