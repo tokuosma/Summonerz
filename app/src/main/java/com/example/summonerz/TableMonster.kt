@@ -1,7 +1,6 @@
 package com.example.summonerz
 
-import android.os.Parcel
-import android.os.Parcelable
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Entity(tableName = "monsters",
@@ -25,17 +24,22 @@ data class Monster(
 interface MonsterDao{
     @Transaction
     @Insert
-    fun insert(reminder : Monster):Long
+    suspend fun insert(monster: Monster)
 
     @Query("SELECT * FROM monsters")
-    fun getAllMonsters(): List<Monster>
+    fun getAllMonsters(): LiveData<List<Monster>>
 
     @Query("SELECT * FROM monsters WHERE uid=:id")
     fun getMonsterById(id:Int): Monster
 
+    @Query("SELECT * FROM monsters WHERE scan_raw_value=:scan_raw_value")
+    fun getMonsterByScanValue(scan_raw_value: String?): Monster
+
     @Query("DELETE FROM monsters WHERE uid=:id")
-    fun delete(id:Int)
+    suspend fun delete(id: Int)
+
+    @Query("DELETE FROM monsters")
+    suspend fun deleteAll()
 }
 
-data class MonsterPrototype(val name: String, val icon: String, val type: String) {
-}
+data class MonsterPrototype(val name: String, val icon: String, val type: String)

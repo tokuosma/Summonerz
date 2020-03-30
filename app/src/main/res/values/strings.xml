@@ -56,5 +56,6 @@
     <string name="prompt_move_camera_closer">Move closer to search</string>
     <string name="prompt_searching">Searching&#8230;</string>
     <string name="scanned_monster_label">Scanned monster</string>
+    <string name="monster_icon">Monster icon</string>
 
 </resources>

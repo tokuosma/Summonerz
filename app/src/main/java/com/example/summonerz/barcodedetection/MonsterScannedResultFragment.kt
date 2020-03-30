@@ -6,12 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.activityViewModels
 import com.example.summonerz.CreateMonster
 import com.example.summonerz.Monster
+import com.example.summonerz.MonsterViewModel
 import com.example.summonerz.R
 import com.example.summonerz.camera.WorkflowModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -19,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class MonsterScannedResultFragment: BottomSheetDialogFragment() {
 
     private lateinit var monster:Monster
-
+    private val monsterViewModel: MonsterViewModel by activityViewModels()
     override fun onCreateView(
         layoutInflater: LayoutInflater,
         viewGroup: ViewGroup?,
@@ -53,17 +55,36 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
         view.findViewById<TextView>(R.id.monster_name).text = monster.name
         view.findViewById<ImageView>(R.id.monster_icon).setImageResource(resources.getIdentifier(monster.icon , "drawable",
             activity?.packageName
-        ));
+        )
+        )
 
+//        view.findViewById<Button>(R.id.button_save).setOnClickListener {
+//            GlobalScope.launch {
+//                val db = Room.databaseBuilder(requireActivity().applicationContext, MonsterDatabase::class.java, "monsters")
+//                    .build()
+//                db.monsterDao().insert(monster = monster)
+//                db.close()
+//                requireActivity().finish()
+//            }
+//        }
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        view.findViewById<Button>(R.id.button_save).setOnClickListener {
+            monsterViewModel.insert(this.monster)
+            requireActivity().finish()
+        }
+    }
 
     override fun onDismiss(dialogInterface: DialogInterface) {
         activity?.let {
             // Back to working state after the bottom sheet is dismissed.
-            ViewModelProviders.of(it).get<WorkflowModel>(WorkflowModel::class.java)
-                .setWorkflowState(WorkflowModel.WorkflowState.DETECTING)
+            val model: WorkflowModel by activityViewModels()
+            model.setWorkflowState(WorkflowModel.WorkflowState.DETECTING)
         }
         super.onDismiss(dialogInterface)
     }
@@ -88,7 +109,7 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
         }
 
         fun dismiss(fragmentManager: FragmentManager) {
-            (fragmentManager.findFragmentByTag(TAG) as BarcodeResultFragment?)?.dismiss()
+            (fragmentManager.findFragmentByTag(TAG) as MonsterScannedResultFragment?)?.dismiss()
         }
     }
 }

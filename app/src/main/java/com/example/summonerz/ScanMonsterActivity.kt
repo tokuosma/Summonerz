@@ -6,9 +6,13 @@ import android.animation.AnimatorSet
 import android.content.Intent
 import android.hardware.Camera
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +27,8 @@ import com.example.summonerz.camera.WorkflowModel.WorkflowState
 import com.example.summonerz.settings.SettingsActivity
 import com.google.android.material.chip.Chip
 import com.google.common.base.Objects
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 
@@ -38,6 +44,7 @@ class ScanMonsterActivity : AppCompatActivity(), OnClickListener {
     private var workflowModel: WorkflowModel? = null
     private var currentWorkflowState: WorkflowModel.WorkflowState? = null
 
+    private val monsterViewModel: MonsterViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -186,7 +193,28 @@ class ScanMonsterActivity : AppCompatActivity(), OnClickListener {
 
         workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
             if (barcode != null) {
-                MonsterScannedResultFragment.show(supportFragmentManager, barcode.rawValue, barcode.rawBytes)
+                GlobalScope.launch {
+                    val monster: Monster? = monsterViewModel.getMonster(barcode.rawValue.toString())
+                    if (monster != null) {
+                        val handler = Handler(Looper.getMainLooper())
+                        handler.post {
+                            Toast.makeText(
+                                applicationContext,
+                                "Monster already scanned (${monster.scan_raw_value})",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            workflowModel?.setWorkflowState(WorkflowState.DETECTING)
+                        }
+                    } else {
+                        MonsterScannedResultFragment.show(
+                            supportFragmentManager,
+                            barcode.rawValue,
+                            barcode.rawBytes
+                        )
+
+                    }
+                }
             }
         })
     }
