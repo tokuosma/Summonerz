@@ -26,10 +26,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.summonerz.CreateMonster
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.summonerz.R
 import com.example.summonerz.camera.WorkflowModel
 import com.example.summonerz.camera.WorkflowModel.WorkflowState
+import org.jetbrains.anko.doAsync
 
 /** Displays the bottom sheet to present barcode fields contained in the detected barcode.  */
 class BarcodeResultFragment : BottomSheetDialogFragment() {

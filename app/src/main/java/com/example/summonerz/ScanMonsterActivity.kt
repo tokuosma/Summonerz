@@ -12,9 +12,9 @@ import android.view.View.OnClickListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.summonerz.barcodedetection.BarcodeField
 import com.example.summonerz.barcodedetection.BarcodeProcessor
 import com.example.summonerz.barcodedetection.BarcodeResultFragment
+import com.example.summonerz.barcodedetection.MonsterScannedResultFragment
 import com.example.summonerz.camera.CameraSource
 import com.example.summonerz.camera.CameraSourcePreview
 import com.example.summonerz.camera.GraphicOverlay
@@ -23,13 +23,10 @@ import com.example.summonerz.camera.WorkflowModel.WorkflowState
 import com.example.summonerz.settings.SettingsActivity
 import com.google.android.material.chip.Chip
 import com.google.common.base.Objects
-import com.google.firebase.FirebaseApp
-import com.google.firebase.FirebaseOptions
 import java.io.IOException
-import java.util.*
 
 
-class ScanActivity : AppCompatActivity(), OnClickListener {
+class ScanMonsterActivity : AppCompatActivity(), OnClickListener {
 
     private var cameraSource: CameraSource? = null
     private var preview: CameraSourcePreview? = null
@@ -49,7 +46,7 @@ class ScanActivity : AppCompatActivity(), OnClickListener {
 
         preview = findViewById(R.id.camera_preview)
         graphicOverlay = findViewById<GraphicOverlay>(R.id.camera_preview_graphic_overlay).apply {
-            setOnClickListener(this@ScanActivity)
+            setOnClickListener(this@ScanMonsterActivity)
             cameraSource = CameraSource(this)
         }
 
@@ -61,10 +58,10 @@ class ScanActivity : AppCompatActivity(), OnClickListener {
 
         findViewById<View>(R.id.close_button).setOnClickListener(this)
         flashButton = findViewById<View>(R.id.flash_button).apply {
-            setOnClickListener(this@ScanActivity)
+            setOnClickListener(this@ScanMonsterActivity)
         }
         settingsButton = findViewById<View>(R.id.settings_button).apply {
-            setOnClickListener(this@ScanActivity)
+            setOnClickListener(this@ScanMonsterActivity)
         }
 
         setUpWorkflowModel()
@@ -189,14 +186,12 @@ class ScanActivity : AppCompatActivity(), OnClickListener {
 
         workflowModel?.detectedBarcode?.observe(this, Observer { barcode ->
             if (barcode != null) {
-                val barcodeFieldList = ArrayList<BarcodeField>()
-                barcodeFieldList.add(BarcodeField("Raw Value", barcode.rawValue ?: ""))
-                BarcodeResultFragment.show(supportFragmentManager, barcodeFieldList)
+                MonsterScannedResultFragment.show(supportFragmentManager, barcode.rawValue, barcode.rawBytes)
             }
         })
     }
 
     companion object {
-        private const val TAG = "ScanActivity"
+        private const val TAG = "ScanMonsterActivity"
     }
 }

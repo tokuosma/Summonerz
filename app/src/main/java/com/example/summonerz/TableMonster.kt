@@ -1,5 +1,7 @@
 package com.example.summonerz
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.*
 
 @Entity(tableName = "monsters",
@@ -7,8 +9,9 @@ import androidx.room.*
 )
 data class Monster(
     @PrimaryKey(autoGenerate = true) var uid : Int?,
-    @ColumnInfo(name = "name") var name : String?,
-    @ColumnInfo(name = "type") var type : String?,
+    @ColumnInfo(name = "name") var name : String,
+    @ColumnInfo(name = "type") var type : String,
+    @ColumnInfo(name="icon") var icon:String, // since version 2
     @ColumnInfo(name = "time_of_scan") var time_of_scan : Long?,
     @ColumnInfo(name = "hp") var hp: Int?,
     @ColumnInfo(name = "mp") var mp: Int?,
@@ -32,4 +35,7 @@ interface MonsterDao{
 
     @Query("DELETE FROM monsters WHERE uid=:id")
     fun delete(id:Int)
+}
+
+data class MonsterPrototype(val name: String, val icon: String, val type: String) {
 }

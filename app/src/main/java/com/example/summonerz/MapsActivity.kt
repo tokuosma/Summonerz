@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
-import android.os.Build
 import android.os.Build.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.toast
 //import org.jetbrains.anko.toast
 import java.util.*
-import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -73,7 +71,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
         scan_button.setOnClickListener {
-            val intent = Intent(applicationContext, ScanActivity::class.java)
+            val intent = Intent(applicationContext, ScanMonsterActivity::class.java)
             startActivity(intent)
         }
 

@@ -21,4 +21,5 @@
     <dimen name="barcode_field_value_padding">16dp</dimen>
     <dimen name="barcode_field_label_size">12sp</dimen>
     <dimen name="barcode_field_label_padding">4dp</dimen>
+    <dimen name="monster_scanned_icon_size">64dp</dimen>
 </resources>

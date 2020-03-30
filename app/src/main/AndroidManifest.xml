@@ -35,7 +35,7 @@
 
         </activity>
         <activity
-            android:name=".ScanActivity"
+            android:name=".ScanMonsterActivity"
             android:parentActivityName=".MapsActivity"
             android:screenOrientation="portrait">
 
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".settings.SettingsActivity"
-            android:parentActivityName=".ScanActivity">
+            android:parentActivityName=".ScanMonsterActivity">
         </activity>
         <activity
             android:name=".MonsterListActivity"
