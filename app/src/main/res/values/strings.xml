@@ -4,6 +4,11 @@
     <string name="add_monster_button">Add</string>
     <string name="login_button">Login</string>
     <string name="cultist_text">Ph’nglui mglw’nafh Cthulhu R’lyeh wgah’nagl fhtagn.</string>
+    <string name="welcome_text1">Attempting to perform a blood ritual, a mysterious order known only as The Pyrite Dusk
+has inadvertently released a horde of horrible monsters from unknown worlds into ours!
+</string>
+    <string name="welcome_text2">The monsters seem to hibernating in Places of Power for now...</string>
+    <string name="welcome_text3">It is up to you to scan as many monsters as you can to gain knowledge from them!</string>
 
     <!-- Strings for barcode detection settings. -->
     <string name="pref_category_barcode_detection">Barcode detection</string>

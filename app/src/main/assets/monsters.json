@@ -20,278 +20,573 @@
     "type":"common"
   },
   {
-    "name":"blordi",
+    "name":"Blordi",
     "icon":"ic_beast_eye",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Eye Of The Beholder",
     "icon":"ic_behold",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Fangs McGee",
     "icon":"ic_bestial_fangs",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Bottled Shadow",
     "icon":"ic_bottled_shadow",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Brain Tentacle",
     "icon":"ic_brain_tentacle",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Brute",
     "icon":"ic_brute",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"The Bully",
     "icon":"ic_bully_minion",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Carnivorous Plant",
     "icon":"ic_carnivorous_plant",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Ceiling Barnacle",
     "icon":"ic_ceiling_barnacle",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Centaur",
     "icon":"ic_centaur",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Cracked Alien Skull",
     "icon":"ic_cracked_alien_skull",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Cyclops",
     "icon":"ic_cyclops",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Daemon Tentacle",
     "icon":"ic_daemon_pull",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Daemon Skull",
     "icon":"ic_daemon_skull",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Devil Mask",
     "icon":"ic_devil_mask",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Diablo Skull",
     "icon":"ic_diablo_skull",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Dinosaur Bones",
     "icon":"ic_dinosaur_bones",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Dinosaur Egg",
     "icon":"ic_dinosaur_egg",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Rex",
     "icon":"ic_dinosaur_rex",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Djinn",
     "icon":"ic_djinn",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Double Headed Dragon",
     "icon":"ic_double_dragon",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Dragon Skull",
     "icon":"ic_dragon_head",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Dragon Head",
     "icon":"ic_dragon_head2",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Long Dragon",
     "icon":"ic_dragon_spiral",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Drakkar Dragon",
     "icon":"ic_drakkar_dragon",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Egyptian Sphinx",
     "icon":"ic_egyptian_sphinx",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Ent",
     "icon":"ic_ent_mouth",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Bat",
     "icon":"ic_evil_bat",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Book",
     "icon":"ic_evil_book",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Comet",
     "icon":"ic_evil_comet",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Fork",
     "icon":"ic_evil_fork",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Minion",
     "icon":"ic_evil_minion",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Moon",
     "icon":"ic_evil_moon",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Tree",
     "icon":"ic_evil_tree",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Tree",
     "icon":"ic_eyestalk",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Hey Listen",
     "icon":"ic_fairy",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Fairy",
     "icon":"ic_fairy2",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Female Vampire",
     "icon":"ic_female_vampire",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"A Deep One",
     "icon":"ic_fish_monster",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Fleshy Mass",
     "icon":"ic_fleshy_mass",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Floating Ghost",
     "icon":"ic_floating_ghost",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Floating Tentacles",
     "icon":"ic_floating_tentacles",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Fomorian",
     "icon":"ic_fomorian",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Frankenstein Creature",
     "icon":"ic_frankenstein_creature",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Gargoyle",
     "icon":"ic_gargoyle",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Ghost",
     "icon":"ic_ghost",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Smiley",
     "icon":"ic_sharp_smile",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Evil Slime",
     "icon":"ic_slime",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Spark Spirit",
     "icon":"ic_spark_spirit",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Spectre",
     "icon":"ic_spectre",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Spider Eye",
     "icon":"ic_spider_eye",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Spiked Dragon",
     "icon":"ic_spiked_dragon_head",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Swallower",
     "icon":"ic_swallower",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Swamp Bat",
     "icon":"ic_swamp_bat",
     "type":"common"
   },
   {
-    "name":"",
+    "name":"Thwomp",
     "icon":"ic_thwomp",
     "type":"common"
+  },
+  {
+  "name":"Giant",
+  "icon":"ic_giant",
+  "type":"uncommon"
+  },
+  {
+    "name":"Gluttonous Smile",
+    "icon":"ic_gluttonous_smile",
+    "type":"uncommon"
+  },
+  {
+    "name":"Goblin Head",
+    "icon":"ic_goblin_head",
+    "type":"uncommon"
+  },
+  {
+    "name":"Golem Head",
+    "icon":"ic_golem_head",
+    "type":"uncommon"
+  },
+  {
+    "name":"Gooey Daemon",
+    "icon":"ic_gooey_daemon",
+    "type":"uncommon"
+  },
+  {
+    "name":"Grasping Slug",
+    "icon":"ic_grasping_slug",
+    "type":"uncommon"
+  },
+  {
+    "name":"Greek Sphinx",
+    "icon":"ic_greek_sphinx",
+    "type":"uncommon"
+  },
+  {
+    "name":"Griffin",
+    "icon":"ic_griffin_symbol",
+    "type":"uncommon"
+  },
+  {
+    "name":"Grim Reaper",
+    "icon":"ic_grim_reaper",
+    "type":"uncommon"
+  },
+  {
+    "name":"Half Body",
+    "icon":"ic_half_body_crawling",
+    "type":"uncommon"
+  },
+  {
+    "name":"Harpy",
+    "icon":"ic_harpy",
+    "type":"uncommon"
+  },
+  {
+    "name":"Haunting",
+    "icon":"ic_haunting",
+    "type":"uncommon"
+  },
+  {
+    "name":"Horned Reptile",
+    "icon":"ic_horned_reptile",
+    "type":"uncommon"
+  },
+  {
+    "name":"Horned skull",
+    "icon":"ic_horned_skull",
+    "type":"uncommon"
+  },
+  {
+    "name":"Horus",
+    "icon":"ic_horus",
+    "type":"uncommon"
+  },
+  {
+    "name":"Hydra",
+    "icon":"ic_hydra",
+    "type":"uncommon"
+  },
+  {
+    "name":"Runic Hydra",
+    "icon":"ic_hydra_shot",
+    "type":"uncommon"
+  },
+  {
+    "name":"Ice Golem",
+    "icon":"ic_ice_golem",
+    "type":"uncommon"
+  },
+  {
+    "name":"Ifrit",
+    "icon":"ic_ifrit",
+    "type":"uncommon"
+  },
+  {
+    "name":"Imp",
+    "icon":"ic_imp",
+    "type":"uncommon"
+  },
+  {
+    "name":"Laughing Imp",
+    "icon":"ic_imp_laugh",
+    "type":"uncommon"
+  },
+  {
+    "name":"Infested Mass",
+    "icon":"ic_infested_mass",
+    "type":"uncommon"
+  },
+  {
+    "name":"Jawless Cyclops",
+    "icon":"ic_jawless_cyclop",
+    "type":"uncommon"
+  },
+  {
+    "name":"Kenku",
+    "icon":"ic_kenku_head",
+    "type":"uncommon"
+  },
+  {
+    "name":"Kraken",
+    "icon":"ic_kraken_tentacle",
+    "type":"uncommon"
+  },
+  {
+    "name":"Lizard Man",
+    "icon":"ic_lizardman",
+    "type":"uncommon"
+  },
+  {
+    "name":"Medusa",
+    "icon":"ic_medusa_head",
+    "type":"uncommon"
+  },
+  {
+    "name":"Mermaid",
+    "icon":"ic_mermaid",
+    "type":"uncommon"
+  },
+  {
+    "name":"Metroid",
+    "icon":"ic_metroid",
+    "type":"uncommon"
+  },
+  {
+    "name":"Mimic",
+    "icon":"ic_mimic_chest",
+    "type":"uncommon"
+  },
+  {
+    "name":"Minotaur",
+    "icon":"ic_minotaur",
+    "type":"rare"
+  },
+  {
+    "name":"Mummy",
+    "icon":"ic_mummy_head" ,
+    "type":"rare"
+  },
+  {
+    "name":"Ogre",
+    "icon":"ic_ogre",
+    "type":"rare"
+  },
+  {
+    "name":"Oni",
+    "icon":"ic_oni",
+    "type":"rare"
+  },
+  {
+    "name":"Orc",
+    "icon":"ic_orc_head",
+    "type":"rare"
+  },
+  {
+    "name":"Pick Of Destiny",
+    "icon":"ic_pick_of_destiny",
+    "type":"rare"
+  },
+  {
+    "name":"Pretty Fangs",
+    "icon":"ic_pretty_fangs",
+    "type":"rare"
+  },
+  {
+    "name":"Tentacle",
+    "icon":"ic_purple_tentacle",
+    "type":"rare"
+  },
+  {
+    "name":"Resting Vampire",
+    "icon":"ic_resting_vampire",
+    "type":"rare"
+  },
+  {
+    "name":"Rock Golem",
+    "icon":"ic_rock_golem",
+    "type":"rare"
+  },
+  {
+    "name":"Sasquatch",
+    "icon":"ic_sasquatch",
+    "type":"rare"
+  },
+  {
+    "name":"Sea Creature",
+    "icon":"ic_sea_creature",
+    "type":"rare"
+  },
+  {
+    "name":"Sea Dragon",
+    "icon":"ic_sea_dragon",
+    "type":"rare"
+  },
+  {
+    "name":"Shambling Mound",
+    "icon":"ic_shambling_mound",
+    "type":"rare"
+  },
+  {
+    "name":"Shambling Zombie",
+    "icon":"ic_shambling_zombie",
+    "type":"rare"
+  },
+  {
+    "name":"Teeth Toad",
+    "icon":"ic_toad_teeth",
+    "type":"epic"
+  },
+  {
+    "name":"Transparent Slime",
+    "icon":"ic_transparent_slime",
+    "type":"epic"
+  },
+  {
+    "name":"Tree Face",
+    "icon":"ic_tree_face",
+    "type":"epic"
+  },
+  {
+    "name":"Dagon",
+    "icon":"ic_triton_head",
+    "type":"epic"
+  },
+  {
+    "name":"Troglodyte",
+    "icon":"ic_troglodyte",
+    "type":"epic"
+  },
+  {
+    "name":"Troll",
+    "icon":"ic_troll",
+    "type":"epic"
+  },
+  {
+    "name":"Unfriendly Fire",
+    "icon":"ic_unfriendly_fire",
+    "type":"epic"
+  },
+  {
+    "name":"Unicorn",
+    "icon":"ic_unicorn",
+    "type":"epic"
+  },
+  {
+    "name":"Dracula",
+    "icon":"ic_vampire_dracula",
+    "type":"master"
+  },
+  {
+    "name":"Vile Fluid",
+    "icon":"ic_vile_fluid",
+    "type":"master"
+  },
+  {
+    "name":"Werewolf",
+    "icon":"ic_werewolf",
+    "type":"master"
+  },
+  {
+    "name":"The Witch",
+    "icon":"ic_witch_face",
+    "type":"master"
+  },
+  {
+    "name":"Flying Witch",
+    "icon":"ic_witch_flight",
+    "type":"legendary"
+  },
+  {
+    "name":"Wyvern",
+    "icon":"ic_wyvern",
+    "type":"legendary"
   }
 ]

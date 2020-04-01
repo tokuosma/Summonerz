@@ -39,7 +39,6 @@ class CreateMonster() {
             val prototype = monsterPrototypes[random.nextInt(monsterPrototypes.size)]
 
             monster.scan_raw_value = rawValueString
-            //TODO: Nimet JSON:iin
             //TODO: Nimen satunnaistus?
             monster.name = prototype.name
             monster.icon = prototype.icon
