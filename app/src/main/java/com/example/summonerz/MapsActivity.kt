@@ -10,8 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.toast
@@ -29,6 +29,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var gMap: GoogleMap
     lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var geofencingClient: GeofencingClient
+    private val USER_GEOFENCE_ID = "USER_GEOFENCE_ID"
+    private val PLACE_GEOFENCE_ID = "PLACE_GEOFENCE_ID"
+    private val USER_GEOFENCE_RADIUS = 1000
+    private val PLACE_GEOFENCE_RADIUS = 100
+    private val GEOFENCE_EXPIRATION = 1000*60*60
+    private val GEOFENCE_DWELL_DELAY = 1000*60
+
 //    Random kotlin test
 //    val randomvalues = List(10){
 //        Random(10)
@@ -74,10 +83,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(applicationContext, ScanMonsterActivity::class.java)
             startActivity(intent)
         }
-
+        geofencingClient = LocationServices.getGeofencingClient(this)
 
     }
 
+    /*private fun createGeoFence(
+        location:LatLng,
+        type:String,
+        geofencingClient: GeofencingClient
+    ) {
+        if(type=="user") {
+            val geofence = Geofence.Builder().setRequestId(USER_GEOFENCE_ID)
+                .setCircularRegion(
+                    location.latitude,
+                    location.longitude,
+                    USER_GEOFENCE_RADIUS.toFloat()
+                ).setExpirationDuration(GEOFENCE_EXPIRATION.toLong()).setTransitionTypes(
+                    Geofence.GEOFENCE_TRANSITION_EXIT
+                ).setLoiteringDelay(GEOFENCE_DWELL_DELAY).build()
+
+            val geofencingRequest =
+                GeofencingRequest.Builder().setInitialTrigger()
+        }
+    }*/
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -106,6 +134,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(map: GoogleMap?) {
         gMap=map?:return
+        gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json))
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             gMap.isMyLocationEnabled=true
             fusedLocationClient= LocationServices.getFusedLocationProviderClient(this)
@@ -129,19 +158,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 permissions.toTypedArray(),
                 123)
         }
+        gMap.setMinZoomPreference(14.0f)
+        gMap.setMaxZoomPreference(17.0f)
         gMap.setOnMapClickListener {location:LatLng ->
             with(gMap){
                 clear()
                 animateCamera(CameraUpdateFactory.newLatLngZoom(location, 13f))
 
-                val geocoder= Geocoder(applicationContext, Locale.getDefault())
+                val geocoder= Geocoder(applicationContext)
                 var title = ""
                 var city = ""
                 try{
 
                     val addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    city = addressList.get(0).locality
-                    title = addressList.get(0).getAddressLine(1)
+                    city = addressList[0].locality
+                    title = addressList[0].getAddressLine(1)
 
                 }catch (e:Exception){
 
