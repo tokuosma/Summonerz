@@ -16,11 +16,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.activity_maps.*
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 //import org.jetbrains.anko.toast
 import java.util.*
@@ -38,11 +36,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val GEOFENCE_EXPIRATION = 1000*60*60
     private val GEOFENCE_DWELL_DELAY = 1000*60
 
-//    Random kotlin test
-//    val randomvalues = List(10){
-//        Random(10)
-//        Random.nextInt(0,100)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +77,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
         geofencingClient = LocationServices.getGeofencingClient(this)
+
 
     }
 
@@ -135,6 +129,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap?) {
         gMap=map?:return
         gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json))
+//        gMap.
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             gMap.isMyLocationEnabled=true
             fusedLocationClient= LocationServices.getFusedLocationProviderClient(this)
@@ -160,31 +155,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         gMap.setMinZoomPreference(14.0f)
         gMap.setMaxZoomPreference(17.0f)
-        gMap.setOnMapClickListener {location:LatLng ->
-            with(gMap){
-                clear()
-                animateCamera(CameraUpdateFactory.newLatLngZoom(location, 13f))
+//        gMap.setOnMapClickListener {location:LatLng ->
+//            with(gMap){
+//                clear()
+//                animateCamera(CameraUpdateFactory.newLatLngZoom(location, 13f))
+//
+//                val geocoder= Geocoder(applicationContext)
+//                var title = ""
+//                var city = ""
+//                try{
+//
+//                    val addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+//                    city = addressList[0].locality
+//                    title = addressList[0].getAddressLine(1)
+//
+//                }catch (e:Exception){
+//
+//                }
+//                val marker=addMarker(MarkerOptions().position(location).snippet(city).title(title))
+//                marker.showInfoWindow()
+//                addCircle(
+//                    CircleOptions().center(location)
+//                    .strokeColor(Color.argb(50,0,70,70))
+//                    .fillColor(Color.argb(100,150,150,150)))
+//
+//            }
+//        }
 
-                val geocoder= Geocoder(applicationContext)
-                var title = ""
-                var city = ""
-                try{
 
-                    val addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    city = addressList[0].locality
-                    title = addressList[0].getAddressLine(1)
-
-                }catch (e:Exception){
-
-                }
-                val marker=addMarker(MarkerOptions().position(location).snippet(city).title(title))
-                marker.showInfoWindow()
-                addCircle(
-                    CircleOptions().center(location)
-                    .strokeColor(Color.argb(50,0,70,70))
-                    .fillColor(Color.argb(100,150,150,150)))
-
-            }
-        }
     }
+
 }
