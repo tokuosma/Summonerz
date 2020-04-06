@@ -45,7 +45,7 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
                 ByteArray(0)
             }
 
-        monster = CreateMonster.createMonster(context,rawValueString, rawValueBytes)
+        monster = CreateMonster.createMonster(context, rawValueString)
 //        view.findViewById<RecyclerView>(R.id.barcode_field_recycler_view).apply {
 //            setHasFixedSize(true)
 //            layoutManager = LinearLayoutManager(activity)

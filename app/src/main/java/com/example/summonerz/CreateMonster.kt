@@ -2,12 +2,10 @@ package com.example.summonerz
 
 import android.content.Context
 import java.io.IOException
-import java.nio.ByteBuffer
 import kotlin.random.Random
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
-import kotlin.random.nextUInt
 
 
 class CreateMonster() {
@@ -15,7 +13,7 @@ class CreateMonster() {
     companion object {
 
         private const val RANDOM_MAX_VALUE = 5000000
-        fun createMonster(context:Context?, rawValueString:String?, rawValueBytes: ByteArray?): Monster {
+        fun createMonster(context: Context?, rawValueString: String?): Monster {
             val monster = Monster(
                 uid = null,
                 name = "",
@@ -35,7 +33,7 @@ class CreateMonster() {
             val listMonsterPrototypes = object : TypeToken<List<MonsterPrototype>>() {}.type
 
             val monsterPrototypes: List<MonsterPrototype> = gson.fromJson(jsonString, listMonsterPrototypes)
-            val random = Random(ByteBuffer.wrap(rawValueBytes).long)
+            val random = Random(rawValueString.hashCode())
             val prototype = monsterPrototypes[random.nextInt(monsterPrototypes.size)]
 
             monster.scan_raw_value = rawValueString
