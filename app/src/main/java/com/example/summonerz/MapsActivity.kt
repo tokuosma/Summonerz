@@ -1,27 +1,26 @@
 package com.example.summonerz
 
+//import org.jetbrains.anko.toast
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.location.Geocoder
 import android.location.Location
-import android.os.Build.*
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.*
-
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import kotlinx.android.synthetic.main.activity_maps.*
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
-//import org.jetbrains.anko.toast
-import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -47,10 +46,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         var fabOpened = false
 
-        itemList.setOnClickListener{
-            val intent = Intent(applicationContext, ItemListActivity::class.java)
-            startActivity(intent)
-        }
         monsterList.setOnClickListener{
             val intent = Intent(applicationContext, MonsterListActivity::class.java)
             startActivity(intent)
@@ -62,12 +57,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapMenu.setOnClickListener{
             if(!fabOpened){
                 fabOpened = true
-                itemList.animate().translationY(resources.getDimension(R.dimen.standard_66)) //66dp
-                monsterList.animate().translationY(resources.getDimension(R.dimen.standard_116)) //132dp
-                settings.animate().translationY(resources.getDimension((R.dimen.standard_156))) //(132 + 66)dp
+                //itemList.animate().translationY(resources.getDimension(R.dimen.standard_66)) //66dp
+                monsterList.animate()
+                    .translationY(resources.getDimension(R.dimen.standard_66)) //132dp
+                settings.animate()
+                    .translationY(resources.getDimension((R.dimen.standard_116))) //(132 + 66)dp
             } else{
                 fabOpened = false
-                itemList.animate().translationY(0f)
+                //itemList.animate().translationY(0f)
                 monsterList.animate().translationY(0f)
                 settings.animate().translationY(0f)
             }
