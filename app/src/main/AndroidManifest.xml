@@ -9,8 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +18,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MonsterViewActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -31,33 +31,23 @@
         </activity>
         <activity
             android:name=".MapsActivity"
-            android:parentActivityName=".MainActivity">
-
-        </activity>
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".ScanMonsterActivity"
             android:parentActivityName=".MapsActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SettingsActivity"
-            android:parentActivityName=".MapsActivity">
-        </activity>
+            android:parentActivityName=".MapsActivity"></activity>
         <activity
             android:name=".settings.SettingsActivity"
-            android:parentActivityName=".ScanMonsterActivity">
-        </activity>
+            android:parentActivityName=".ScanMonsterActivity"></activity>
         <activity
             android:name=".MonsterListActivity"
-            android:parentActivityName=".MapsActivity">
-
-        </activity>
+            android:parentActivityName=".MapsActivity"></activity>
         <activity
             android:name=".ItemListActivity"
-            android:parentActivityName=".MapsActivity">
-
-        </activity>
+            android:parentActivityName=".MapsActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -69,7 +59,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-internal class MonsterListAdapter :
+internal class MonsterListAdapter(val itemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<MonsterListAdapter.MonsterListViewHolder>() {
 
     //Cached copy of monsters
@@ -23,8 +23,13 @@ internal class MonsterListAdapter :
         private val iconView: ImageView = view.findViewById<ImageView>(R.id.monster_icon)
         private val nameView: TextView = view.findViewById(R.id.monster_name)
         private val typeView: TextView = view.findViewById(R.id.monster_type)
+        private var monsterId: Int? = null
 
-        fun bindMonster(context: Context, monster: Monster) {
+        fun bindMonster(
+            context: Context,
+            monster: Monster,
+            itemClickListener: OnItemClickListener
+        ) {
             iconView.setImageResource(
                 context.resources.getIdentifier(
                     monster.icon, "drawable",
@@ -33,13 +38,17 @@ internal class MonsterListAdapter :
             )
             nameView.text = monster.name
             typeView.text = monster.type
+            monsterId = monster.uid
+            itemView.setOnClickListener {
+                itemClickListener.onItemClicked(monster)
+            }
         }
 
         companion object {
-
             fun create(parent: ViewGroup): MonsterListViewHolder {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.monster_list_item_view, parent, false)
+
                 return MonsterListViewHolder(view)
             }
         }
@@ -48,8 +57,9 @@ internal class MonsterListAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonsterListViewHolder =
         MonsterListViewHolder.create(parent)
 
-    override fun onBindViewHolder(holder: MonsterListViewHolder, position: Int) =
-        holder.bindMonster(holder.itemView.context, monsters[position])
+    override fun onBindViewHolder(holder: MonsterListViewHolder, position: Int) {
+        holder.bindMonster(holder.itemView.context, monsters[position], itemClickListener)
+    }
 
     internal fun setMonsters(monsters: List<Monster>) {
         this.monsters = monsters
@@ -59,3 +69,4 @@ internal class MonsterListAdapter :
     override fun getItemCount(): Int =
         monsters.size
 }
+
