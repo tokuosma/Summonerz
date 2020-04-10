@@ -1,6 +1,8 @@
 package com.example.summonerz
 
 //import org.jetbrains.anko.toast
+
+//import org.jetbrains.anko.toast
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -9,17 +11,11 @@ import android.location.Location
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.net.Uri
-import android.os.Build.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.GeofencingClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -28,10 +24,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.toast
-import java.net.URI
-import java.net.URL
-//import org.jetbrains.anko.toast
-import java.util.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -88,6 +80,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
         disablescan(this)
+        if (BuildConfig.DEBUG) {
+            enablescan(this)
+        }
         geofencingClient = LocationServices.getGeofencingClient(this)
 
 
