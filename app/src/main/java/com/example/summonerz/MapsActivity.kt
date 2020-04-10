@@ -1,15 +1,19 @@
 package com.example.summonerz
 
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
+import android.net.Uri
 import android.os.Build.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,6 +24,8 @@ import com.google.android.gms.maps.model.*
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
+import java.net.URI
+import java.net.URL
 //import org.jetbrains.anko.toast
 import java.util.*
 
@@ -27,6 +33,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var gMap: GoogleMap
     lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var client: GoogleApiClient
+    private lateinit var request: LocationRequest
 
     private lateinit var geofencingClient: GeofencingClient
     private val USER_GEOFENCE_ID = "USER_GEOFENCE_ID"
@@ -76,30 +85,72 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(applicationContext, ScanMonsterActivity::class.java)
             startActivity(intent)
         }
+        disablescan(this)
         geofencingClient = LocationServices.getGeofencingClient(this)
 
 
     }
 
-    /*private fun createGeoFence(
+    private fun createUserGeoFence(
         location:LatLng,
-        type:String,
         geofencingClient: GeofencingClient
     ) {
-        if(type=="user") {
             val geofence = Geofence.Builder().setRequestId(USER_GEOFENCE_ID)
                 .setCircularRegion(
                     location.latitude,
                     location.longitude,
-                    USER_GEOFENCE_RADIUS.toFloat()
-                ).setExpirationDuration(GEOFENCE_EXPIRATION.toLong()).setTransitionTypes(
-                    Geofence.GEOFENCE_TRANSITION_EXIT
-                ).setLoiteringDelay(GEOFENCE_DWELL_DELAY).build()
+                    USER_GEOFENCE_RADIUS.toFloat())
+                .setExpirationDuration(Geofence.NEVER_EXPIRE) //For now
+                .setTransitionTypes(
+                    Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build()
 
-            val geofencingRequest =
-                GeofencingRequest.Builder().setInitialTrigger()
+            val geofenceRequest =
+                GeofencingRequest.Builder().setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .addGeofence(geofence).build()
+
+            val intent = Intent(this, GeofenceReceiver::class.java)
+                .putExtra("type", "user")
+    }
+
+    private fun createPlaceGeoFence(
+        location:LatLng,
+        geofencingClient: GeofencingClient
+    ) {
+        val geofence = Geofence.Builder().setRequestId(PLACE_GEOFENCE_ID)
+            .setCircularRegion(
+                location.latitude,
+                location.longitude,
+                PLACE_GEOFENCE_RADIUS.toFloat())
+            .setExpirationDuration(Geofence.NEVER_EXPIRE) //For now
+            .setTransitionTypes(
+                Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
+            .build()
+
+        val geofenceRequest =
+            GeofencingRequest.Builder().setInitialTrigger(Geofence.GEOFENCE_TRANSITION_DWELL)
+                .addGeofence(geofence).build()
+
+        val intent = Intent(this, GeofenceReceiver::class.java)
+            .putExtra("type", "place")
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        geofencingClient.addGeofences(geofenceRequest,pendingIntent)
+    }
+
+        private fun disablescan(context: Context) {
+            scan_button.isEnabled = false
         }
-    }*/
+
+        private fun enablescan(context: Context) {
+            scan_button.isEnabled = true
+        }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -118,6 +169,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
+
+    /**
+     * Google places getting places
+     * Needs URL work to get place data
+     * Needs JSON parser to get places
+     * Very mysterious
+    */
+    /*
+    private fun getplaces(
+        map: GoogleMap,
+        location: LatLng
+    ) {
+
+        var places = "grocery store"
+        var key: String = R.values.google_maps_api //Fix API key
+        var ad = java.lang.String.format(
+            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&location=%7f,%7f&radius=2000&type=%s",
+            key, location.latitude, location.longitude,places
+        )
+        var url: Uri = Uri.parse(ad)
+
+        map.clear()
+
+
+    }*/
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -139,9 +216,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     with(gMap){
                         animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 13f))
                     }
+
+                    createUserGeoFence(latLong,geofencingClient)
+
                 }
 
             }
+
         } else {
             var permissions = mutableListOf<String>()
             permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
