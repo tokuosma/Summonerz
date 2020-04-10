@@ -2,6 +2,7 @@ package com.example.summonerz
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.io.Serializable
 
 @Entity(tableName = "monsters",
     indices = [Index(value = ["scan_raw_value"], unique = true)]
@@ -18,7 +19,7 @@ data class Monster(
     @ColumnInfo(name = "speed") var speed:Int?,
     @ColumnInfo(name = "intelligence") var intelligence:Int?,
     @ColumnInfo(name = "scan_raw_value") var scan_raw_value:String?
-)
+) : Serializable
 
 @Dao
 interface MonsterDao{
