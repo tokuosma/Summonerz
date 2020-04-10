@@ -193,7 +193,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var url: Uri = Uri.parse(ad)
 
         map.clear()
-
+        //returns list of latlongs
+        //draw geofences from them
 
     }*/
 
