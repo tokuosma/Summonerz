@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import kotlinx.android.synthetic.main.activity_maps.*
@@ -36,8 +38,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var geofencingClient: GeofencingClient
     private val USER_GEOFENCE_ID = "USER_GEOFENCE_ID"
     private val PLACE_GEOFENCE_ID = "PLACE_GEOFENCE_ID"
-    private val USER_GEOFENCE_RADIUS = 1000
-    private val PLACE_GEOFENCE_RADIUS = 100
+    private val USER_GEOFENCE_RADIUS = 1000.0
+    private val PLACE_GEOFENCE_RADIUS = 100.0
     private val GEOFENCE_EXPIRATION = 1000*60*60
     private val GEOFENCE_DWELL_DELAY = 1000*60
 
@@ -88,7 +90,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    private fun createUserGeoFence(
+    fun createUserGeoFence(
         location:LatLng,
         geofencingClient: GeofencingClient
     ) {
@@ -110,7 +112,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .putExtra("type", "user")
     }
 
-    private fun createPlaceGeoFence(
+    fun createPlaceGeoFence(
         location:LatLng,
         geofencingClient: GeofencingClient
     ) {
@@ -141,13 +143,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         geofencingClient.addGeofences(geofenceRequest,pendingIntent)
     }
 
-        private fun disablescan(context: Context) {
-            scan_button.isEnabled = false
-        }
+    fun disablescan(context: Context) {
+        scan_button.isEnabled = false
+    }
 
-        private fun enablescan(context: Context) {
-            scan_button.isEnabled = true
-        }
+    fun enablescan(context: Context) {
+        scan_button.isEnabled = true
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -173,6 +175,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * Needs JSON parser to get places
      * Very mysterious
     */
+    companion object places {
+
+        fun getplaces(): List<LatLng> {
+            var yo: LatLng = LatLng(65.060828, 25.464570)   //university
+            var ksk: LatLng = LatLng(65.012962, 25.466919)  //downtown
+            var tra: LatLng = LatLng(65.021997, 25.469383)  //tuira
+            val places = listOf(yo, ksk, tra)
+            return places
+        }
+
+    }
     /*
     private fun getplaces(
         map: GoogleMap,
@@ -214,8 +227,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     with(gMap){
                         animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 13f))
                     }
-
+                    var locs: List<LatLng> = getplaces()
+                    gMap.clear()
                     createUserGeoFence(latLong,geofencingClient)
+                    var circleoptions: CircleOptions = CircleOptions()
+                    circleoptions.center(latLong)
+                    circleoptions.radius(USER_GEOFENCE_RADIUS)
+                    circleoptions.strokeColor(Color.RED)
+                    circleoptions.fillColor(Color.GREEN)
+                    gMap.addCircle(circleoptions)
+                    for (loc in locs) {
+                        circleoptions.center(loc)
+                        circleoptions.radius(30.0)
+                        circleoptions.strokeColor(Color.WHITE)
+                        circleoptions.fillColor(Color.YELLOW)
+                        gMap.addCircle(circleoptions)
+                    }
 
                 }
 
