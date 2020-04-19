@@ -44,3 +44,4 @@ interface MonsterDao{
 }
 
 data class MonsterPrototype(val name: String, val icon: String, val type: String)
+data class MonsterStatsPrototype(val hp: Int?, val mp: Int?, val strength: Int?, val speed: Int?, val intelligence: Int?)

@@ -1,0 +1,38 @@
+{
+  "common": {
+    "hp":"100",
+    "mp": "100",
+    "strength":"10",
+    "speed":"10",
+    "intelligence":"10"},
+  "uncommon":{
+    "hp":"200",
+    "mp": "200",
+    "strength":"20",
+    "speed":"20",
+    "intelligence":"20"},
+  "rare":{
+    "hp":"400",
+    "mp": "400",
+    "strength":"40",
+    "speed":"40",
+    "intelligence":"40"},
+  "epic":{
+    "hp":"800",
+    "mp": "800",
+    "strength":"80",
+    "speed":"80",
+    "intelligence":"80"},
+  "master":{
+    "hp":"1600",
+    "mp": "1600",
+    "strength":"160",
+    "speed":"160",
+    "intelligence":"160"},
+  "legendary":{
+    "hp":"3200",
+    "mp": "3200",
+    "strength":"320",
+    "speed":"320",
+    "intelligence":"320"}
+}
