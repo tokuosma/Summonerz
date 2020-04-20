@@ -18,7 +18,13 @@ data class Monster(
     @ColumnInfo(name = "strength") var strength:Int?,
     @ColumnInfo(name = "speed") var speed:Int?,
     @ColumnInfo(name = "intelligence") var intelligence:Int?,
-    @ColumnInfo(name = "scan_raw_value") var scan_raw_value:String?
+    @ColumnInfo(name = "hp_mutation") var hp_mutation:String?, //Since version 3
+    @ColumnInfo(name = "mp_mutation") var mp_mutation:String?, //Since version 3
+    @ColumnInfo(name = "strength_mutation") var strength_mutation:String?, //Since version 3
+    @ColumnInfo(name = "speed_mutation") var speed_mutation:String?, //Since version 3
+    @ColumnInfo(name = "intelligence_mutation") var intelligence_mutation:String?, //Since version 3
+    @ColumnInfo(name = "scan_raw_value") var scan_raw_value:String? //Since version 3
+
 ) : Serializable
 
 @Dao
@@ -45,3 +51,4 @@ interface MonsterDao{
 
 data class MonsterPrototype(val name: String, val icon: String, val type: String)
 data class MonsterStatsPrototype(val hp: Int?, val mp: Int?, val strength: Int?, val speed: Int?, val intelligence: Int?)
+data class MonsterMutationPrototype(val name: String?, val coefficient:Float?)

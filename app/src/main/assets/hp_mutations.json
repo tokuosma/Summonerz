@@ -1,0 +1,14 @@
+[
+  {
+    "name": "delicate",
+    "coefficient": "0.75"
+  },
+  {
+    "name": "normal",
+    "coefficient": "1.00"
+  },
+  {
+    "name": "durable",
+    "coefficient": "1.25"
+  }
+]

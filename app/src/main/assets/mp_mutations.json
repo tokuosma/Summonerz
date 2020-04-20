@@ -1,0 +1,14 @@
+[
+  {
+    "name": "dull",
+    "coefficient": "0.75"
+  },
+  {
+    "name": "normal",
+    "coefficient": "1.00"
+  },
+  {
+    "name": "entranced",
+    "coefficient": "1.25"
+  }
+]

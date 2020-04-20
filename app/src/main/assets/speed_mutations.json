@@ -1,0 +1,14 @@
+[
+  {
+    "name": "sluggish",
+    "coefficient": "0.75"
+  },
+  {
+    "name": "normal",
+    "coefficient": "1.00"
+  },
+  {
+    "name": "swift",
+    "coefficient": "1.25"
+  }
+]

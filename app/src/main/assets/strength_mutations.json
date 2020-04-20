@@ -1,0 +1,14 @@
+[
+  {
+    "name": "gaunt",
+    "coefficient": "0.75"
+  },
+  {
+    "name": "normal",
+    "coefficient": "1.00"
+  },
+  {
+    "name": "stout",
+    "coefficient": "1.25"
+  }
+]

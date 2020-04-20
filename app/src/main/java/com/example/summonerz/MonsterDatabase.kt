@@ -17,7 +17,7 @@ import java.util.*
 //
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = [Monster::class], version = 1, exportSchema = false)
+@Database(entities = [Monster::class], version = 2, exportSchema = false)
 abstract class MonsterDatabase : RoomDatabase() {
 
     abstract fun monsterDao(): MonsterDao
@@ -45,7 +45,12 @@ abstract class MonsterDatabase : RoomDatabase() {
                         speed = null,
                         time_of_scan = date.time,
                         mp = null,
-                        strength = null
+                        strength = null,
+                        hp_mutation = null,
+                        mp_mutation = null,
+                        strength_mutation = null,
+                        speed_mutation = null,
+                        intelligence_mutation = null
                     )
                     monsterDao.insert(monster)
                 }

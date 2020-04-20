@@ -19,7 +19,6 @@ import com.example.summonerz.camera.WorkflowModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MonsterScannedResultFragment: BottomSheetDialogFragment() {
-
     private lateinit var monster:Monster
     private val monsterViewModel: MonsterViewModel by activityViewModels()
     override fun onCreateView(
@@ -27,6 +26,7 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
         viewGroup: ViewGroup?,
         bundle: Bundle?
     ): View {
+
         val view = layoutInflater.inflate(R.layout.monster_scanned_bottom_sheet, viewGroup)
 
         val arguments = arguments
@@ -44,7 +44,6 @@ class MonsterScannedResultFragment: BottomSheetDialogFragment() {
                 Log.e(TAG, "No barcode field list passed in!")
                 ByteArray(0)
             }
-
         monster = CreateMonster.createMonster(context, rawValueString)
 //        view.findViewById<RecyclerView>(R.id.barcode_field_recycler_view).apply {
 //            setHasFixedSize(true)
