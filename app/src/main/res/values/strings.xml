@@ -62,5 +62,10 @@ has inadvertently released a horde of horrible monsters from unknown worlds into
     <string name="prompt_searching">Searching&#8230;</string>
     <string name="scanned_monster_label">Scanned monster</string>
     <string name="monster_icon">Monster icon</string>
+    <string name="creditlink">
+        <a href="https://game-icons.net/tags/creature.html">Monster icons</a>
+        by cathelineau, delapouite, faithtoken, lorc, and skoll are licenced under
+        <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+    </string>
 
 </resources>
