@@ -1,32 +1,25 @@
 package com.example.summonerz
 
-import androidx.core.content.ContextCompat.checkSelfPermission
-
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Matrix
-import android.graphics.Paint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffXfermode
-import android.graphics.RectF
+import android.graphics.*
 import android.hardware.Camera
 import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.exifinterface.media.ExifInterface
 import com.example.summonerz.camera.CameraSizePair
 import java.io.IOException
 import java.io.InputStream
-import java.util.ArrayList
+import java.util.*
 import kotlin.math.abs
+
 object Utils {
 
     /**
@@ -118,6 +111,17 @@ object Utils {
         }
 
         return validPreviewSizes
+    }
+
+    fun getDataFromAsset(context: Context?, fileName: String): String? {
+        val jsonString: String
+        jsonString = try {
+            context?.assets?.open(fileName)?.bufferedReader()?.use { it.readText() } ?: ""
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return null
+        }
+        return jsonString
     }
 
     fun getCornerRoundedBitmap(srcBitmap: Bitmap, cornerRadius: Int): Bitmap {

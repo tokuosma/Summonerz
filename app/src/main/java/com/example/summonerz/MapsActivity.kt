@@ -15,15 +15,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.summonerz.Utils.getDataFromAsset
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.toast
 
@@ -169,20 +170,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    /**
-     * Google places getting places
-     * Needs URL work to get place data
-     * Needs JSON parser to get places
-     * Very mysterious
-    */
     companion object places {
 
-        fun getplaces(): List<LatLng> {
-            var yo: LatLng = LatLng(65.060828, 25.464570)   //university
-            var ksk: LatLng = LatLng(65.012962, 25.466919)  //downtown
-            var tra: LatLng = LatLng(65.021997, 25.469383)  //tuira
-            val places = listOf(yo, ksk, tra)
-            return places
+        fun getplaces(context: Context): List<PlaceOfPower> {
+            val locationString = getDataFromAsset(context, "locations.json")
+            val listLocations =
+                object : TypeToken<List<com.example.summonerz.PlaceOfPower>>() {}.type
+            val gson = Gson()
+            return gson.fromJson(locationString, listLocations)
         }
 
     }
@@ -227,7 +222,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     with(gMap){
                         animateCamera(CameraUpdateFactory.newLatLngZoom(latLong, 13f))
                     }
-                    var locs: List<LatLng> = getplaces()
+                    var locs: List<PlaceOfPower> = getplaces(applicationContext)
                     gMap.clear()
                     createUserGeoFence(latLong,geofencingClient)
                     var circleoptions: CircleOptions = CircleOptions()
@@ -237,11 +232,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     circleoptions.fillColor(Color.GREEN)
                     gMap.addCircle(circleoptions)
                     for (loc in locs) {
-                        circleoptions.center(loc)
-                        circleoptions.radius(30.0)
-                        circleoptions.strokeColor(Color.WHITE)
-                        circleoptions.fillColor(Color.YELLOW)
-                        gMap.addCircle(circleoptions)
+                        gMap.addMarker(
+                            MarkerOptions()
+                                .position(LatLng(loc.lat, loc.long))
+                                .title(loc.name)
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_red_tower))
+                        )
                     }
 
                 }
@@ -292,3 +288,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 }
+
+data class PlaceOfPower(val name: String, val lat: Double, val long: Double)

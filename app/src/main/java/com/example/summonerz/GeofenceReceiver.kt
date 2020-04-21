@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
-import com.google.android.gms.maps.model.LatLng
 
 class GeofenceReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -16,14 +15,14 @@ class GeofenceReceiver: BroadcastReceiver() {
 
         if(intent!!.getStringExtra("type")=="user") {
             if (geofencingTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
-                val places: List<LatLng> = MapsActivity.places.getplaces()
+                val places: List<PlaceOfPower> = MapsActivity.places.getplaces(context!!)
                 //Create place geofences with createPlaceGeofence
             } else if (geofencingTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
                 //Delete user geofence
                 //Get user location
                 //Create new user geofence
             }
-        } else if(intent!!.getStringExtra("type")=="place") {
+        } else if (intent.getStringExtra("type") == "place") {
             if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_ENTER) {
                 locations.add(7)
                 //Add place to list

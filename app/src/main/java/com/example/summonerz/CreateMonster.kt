@@ -2,15 +2,15 @@ package com.example.summonerz
 
 import android.content.Context
 import android.util.Log
-import java.io.IOException
-import kotlin.random.Random
+import com.example.summonerz.Utils.getDataFromAsset
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 import kotlin.math.floor
+import kotlin.random.Random
 
 
-class CreateMonster() {
+class CreateMonster {
 
     companion object {
 
@@ -109,16 +109,7 @@ class CreateMonster() {
 
             return monster
         }
-        private fun getDataFromAsset(context: Context?, fileName: String): String? {
-            val jsonString: String
-            jsonString = try {
-                context?.assets?.open(fileName)?.bufferedReader()?.use { it.readText() } ?: ""
-            } catch (ioException: IOException) {
-                ioException.printStackTrace()
-                return null
-            }
-            return jsonString
-        }
+
     }
 
 
