@@ -82,9 +82,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(intent)
         }
         disablescan()
-        if (BuildConfig.DEBUG) {
+        /*if (BuildConfig.DEBUG) {
             enablescan()
-        }
+        }*/
         geofencingClient = LocationServices.getGeofencingClient(this)
 
 
@@ -103,7 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .setExpirationDuration(Geofence.NEVER_EXPIRE) //For now
             .setTransitionTypes(
                 Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
-            .build()
+            .setLoiteringDelay(GEOFENCE_DWELL_DELAY).build()
 
         val geofenceRequest =
             GeofencingRequest.Builder().setInitialTrigger(Geofence.GEOFENCE_TRANSITION_DWELL)
@@ -161,6 +161,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     inner class MapBroadcastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
+            print("hossonmosso")
             if(intent!!.getStringExtra("scan") == "enable") {
                 enablescan()
             }
@@ -195,6 +196,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     var locs: List<PlaceOfPower> = getplaces(applicationContext)
                     gMap.clear()
                     for ((id, loc) in locs.withIndex()) {
+                        val circleOptions : CircleOptions = CircleOptions()
+                        circleOptions.center(LatLng(loc.lat, loc.long))
+                        circleOptions.radius(100.0)
+                        circleOptions.strokeColor(Color.GREEN)
+                        circleOptions.strokeWidth(2.0F)
+                        map.addCircle(circleOptions)
                         createPlaceGeoFence(LatLng(loc.lat, loc.long), geofencingClient, id)
                         gMap.addMarker(
                             MarkerOptions()

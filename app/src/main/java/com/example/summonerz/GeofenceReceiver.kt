@@ -8,11 +8,13 @@ import com.google.android.gms.location.GeofencingEvent
 import org.json.JSONObject
 import java.util.*
 import java.util.Calendar.getInstance
+import org.jetbrains.anko.toast
 
 class GeofenceReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
+        print("initialisoitu")
         val geofencingEvent = GeofencingEvent.fromIntent(intent)
         val geofencingTransition = geofencingEvent.geofenceTransition
         var locations: MutableList<Pair<Int,PlaceOfPower>> = mutableListOf<Pair<Int,PlaceOfPower>>()
@@ -20,16 +22,19 @@ class GeofenceReceiver: BroadcastReceiver() {
         val places: List<PlaceOfPower> = MapsActivity.places.getplaces(context!!)
 
         if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_ENTER) {
+            print("entteri")
             locations.add(Pair(intent!!.getIntExtra("id", 0),places[intent!!.getIntExtra("id", 0)]))
         }
         else if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_DWELL) {
             //Activate scan
             //MapsActivity.enablescan() not working currently
+            print("sisäistys")
             val intent : Intent = Intent(context, MapsActivity.MapBroadcastReceiver::class.java)
             intent.putExtra("scan", "enable")
             context.sendBroadcast(intent)
         }
         else if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_EXIT) {
+            print("ulostus")
             to_remove = locations.filter { (key, value) -> key == intent!!.getIntExtra("id", 0) }
             locations.removeAll(to_remove)
             if (locations.isEmpty()) {
