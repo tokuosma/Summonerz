@@ -7,8 +7,10 @@ import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
 import org.json.JSONObject
 import java.util.*
+import java.util.Calendar.getInstance
 
 class GeofenceReceiver: BroadcastReceiver() {
+
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val geofencingEvent = GeofencingEvent.fromIntent(intent)
@@ -23,11 +25,20 @@ class GeofenceReceiver: BroadcastReceiver() {
         else if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_DWELL) {
             //Activate scan
             //MapsActivity.enablescan() not working currently
+            val intent : Intent = Intent(context, MapsActivity.MapBroadcastReceiver::class.java)
+            intent.putExtra("scan", "enable")
+            context.sendBroadcast(intent)
         }
         else if(geofencingTransition==Geofence.GEOFENCE_TRANSITION_EXIT) {
             to_remove = locations.filter { (key, value) -> key == intent!!.getIntExtra("id", 0) }
             locations.removeAll(to_remove)
+            if (locations.isEmpty()) {
+                val intent : Intent = Intent(context, MapsActivity.MapBroadcastReceiver::class.java)
+                intent.putExtra("scan", "disable")
+                context.sendBroadcast(intent)
+            }
             //Remove place from list
+            //If empty, disable scan
         }
     }
 }

@@ -4,6 +4,7 @@ package com.example.summonerz
 
 //import org.jetbrains.anko.toast
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -156,6 +157,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             return gson.fromJson(locationString, listLocations)
         }
 
+    }
+
+    inner class MapBroadcastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if(intent!!.getStringExtra("scan") == "enable") {
+                enablescan()
+            }
+            else if (intent!!.getStringExtra("scan") == "disable") {
+                disablescan()
+            }
+        }
     }
 
 
