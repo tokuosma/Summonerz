@@ -37,7 +37,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var request: LocationRequest
 
     private lateinit var geofencingClient: GeofencingClient
-    private val PLACE_GEOFENCE_ID = "PLACE_GEOFENCE_ID"
+    private var PLACE_GEOFENCE_ID = "GEOFENCE_ID"
     private val PLACE_GEOFENCE_RADIUS = 100.0
     private val GEOFENCE_EXPIRATION = 1000*60*60
     private val GEOFENCE_DWELL_DELAY = 1000*60
@@ -80,9 +80,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(applicationContext, ScanMonsterActivity::class.java)
             startActivity(intent)
         }
-        disablescan(this)
+        disablescan()
         if (BuildConfig.DEBUG) {
-            enablescan(this)
+            enablescan()
         }
         geofencingClient = LocationServices.getGeofencingClient(this)
 
@@ -91,7 +91,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun createPlaceGeoFence(
         location:LatLng,
-        geofencingClient: GeofencingClient
+        geofencingClient: GeofencingClient,
+        id:Int
     ) {
         val geofence = Geofence.Builder().setRequestId(PLACE_GEOFENCE_ID)
             .setCircularRegion(
@@ -107,8 +108,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             GeofencingRequest.Builder().setInitialTrigger(Geofence.GEOFENCE_TRANSITION_DWELL)
                 .addGeofence(geofence).build()
 
-        val intent = Intent(this, GeofenceReceiver::class.java)
-            .putExtra("type", "place")
+        val intent = Intent(this, GeofenceReceiver::class.java).putExtra("id", id)
 
         val pendingIntent = PendingIntent.getBroadcast(
             applicationContext,
@@ -120,11 +120,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         geofencingClient.addGeofences(geofenceRequest,pendingIntent)
     }
 
-    fun disablescan(context: Context) {
+    fun disablescan() {
         scan_button.isEnabled = false
     }
 
-    fun enablescan(context: Context) {
+    fun enablescan() {
         scan_button.isEnabled = true
     }
 
@@ -182,7 +182,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     var locs: List<PlaceOfPower> = getplaces(applicationContext)
                     gMap.clear()
-                    for (loc in locs) {
+                    for ((id, loc) in locs.withIndex()) {
+                        createPlaceGeoFence(LatLng(loc.lat, loc.long), geofencingClient, id)
                         gMap.addMarker(
                             MarkerOptions()
                                 .position(LatLng(loc.lat, loc.long))
