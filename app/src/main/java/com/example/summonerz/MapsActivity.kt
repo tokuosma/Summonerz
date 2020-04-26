@@ -161,7 +161,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     inner class MapBroadcastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            print("hossonmosso")
             if(intent!!.getStringExtra("scan") == "enable") {
                 enablescan()
             }
