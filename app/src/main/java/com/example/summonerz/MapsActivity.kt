@@ -37,9 +37,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var request: LocationRequest
 
     private lateinit var geofencingClient: GeofencingClient
-    private val USER_GEOFENCE_ID = "USER_GEOFENCE_ID"
     private val PLACE_GEOFENCE_ID = "PLACE_GEOFENCE_ID"
-    private val USER_GEOFENCE_RADIUS = 1000.0
     private val PLACE_GEOFENCE_RADIUS = 100.0
     private val GEOFENCE_EXPIRATION = 1000*60*60
     private val GEOFENCE_DWELL_DELAY = 1000*60
@@ -89,28 +87,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         geofencingClient = LocationServices.getGeofencingClient(this)
 
 
-    }
-
-    fun createUserGeoFence(
-        location:LatLng,
-        geofencingClient: GeofencingClient
-    ) {
-            val geofence = Geofence.Builder().setRequestId(USER_GEOFENCE_ID)
-                .setCircularRegion(
-                    location.latitude,
-                    location.longitude,
-                    USER_GEOFENCE_RADIUS.toFloat())
-                .setExpirationDuration(Geofence.NEVER_EXPIRE) //For now
-                .setTransitionTypes(
-                    Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
-                .build()
-
-            val geofenceRequest =
-                GeofencingRequest.Builder().setInitialTrigger(Geofence.GEOFENCE_TRANSITION_ENTER)
-                    .addGeofence(geofence).build()
-
-            val intent = Intent(this, GeofenceReceiver::class.java)
-                .putExtra("type", "user")
     }
 
     fun createPlaceGeoFence(
@@ -181,25 +157,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
-    /*
-    private fun getplaces(
-        map: GoogleMap,
-        location: LatLng
-    ) {
 
-        var places = "grocery store"
-        var key: String = R.values.google_maps_api //Fix API key
-        var ad = java.lang.String.format(
-            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&location=%7f,%7f&radius=2000&type=%s",
-            key, location.latitude, location.longitude,places
-        )
-        var url: Uri = Uri.parse(ad)
-
-        map.clear()
-        //returns list of latlongs
-        //draw geofences from them
-
-    }*/
 
     /**
      * Manipulates the map once available.
@@ -224,13 +182,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     var locs: List<PlaceOfPower> = getplaces(applicationContext)
                     gMap.clear()
-                    createUserGeoFence(latLong,geofencingClient)
-                    var circleoptions: CircleOptions = CircleOptions()
-                    circleoptions.center(latLong)
-                    circleoptions.radius(USER_GEOFENCE_RADIUS)
-                    circleoptions.strokeColor(Color.RED)
-                    circleoptions.fillColor(Color.GREEN)
-                    gMap.addCircle(circleoptions)
                     for (loc in locs) {
                         gMap.addMarker(
                             MarkerOptions()
